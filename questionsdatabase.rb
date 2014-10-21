@@ -42,4 +42,12 @@ r3 = Reply.find_by_id(3)[0]
 # qf1 = QuestionFollower.find_by_id(1)
 # p QuestionFollower.followers_for_question_id(1)
 # p QuestionFollower.followed_questions_for_user_id(2)
-p hugh.followed_questions
+#p hugh.followed_questions
+# QuestionFollower.most_followed_questions(1)
+# p QuestionLike.num_likes_for_question_id(1)
+# p QuestionLike.liked_questions_for_user_id(2)
+# p q1.likers
+# p q1.num_likes
+# p seymore.liked_questions
+# p QuestionLike.most_liked_questions(1)
+seymore.average_karma
