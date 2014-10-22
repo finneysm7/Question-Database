@@ -50,4 +50,14 @@ r3 = Reply.find_by_id(3)[0]
 # p q1.num_likes
 # p seymore.liked_questions
 # p QuestionLike.most_liked_questions(1)
-seymore.average_karma
+mrman = Reply.new({'body' => 'U R DUM', 'questionid' => 3, 'userid' => 4})
+p Reply.find_by_id(4)
+mrman.save
+p Reply.find_by_id(4)
+mrs_miss = Reply.new({'reply_id' => 4, 'body' => 'Y U STOOPID', 'questionid' => 3,
+  'userid' => 4})
+p Reply.find_by_id(4)
+mrs_miss.save
+p Reply.find_by_id(4)
+
+# p seymore.average_karma

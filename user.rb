@@ -50,7 +50,7 @@ class User
   def average_karma
     results = QuestionsDatabase.instance.execute(<<-SQL, self.id)
     SELECT 
-      CAST(COUNT(ql.questionid) AS FLOAT) / COUNT (DISTINCT(q.id)) 
+      u.fname, u.lname, CAST(COUNT(ql.questionid) AS FLOAT) / COUNT (DISTINCT(q.id)) 
     FROM
       users u
     JOIN 
@@ -64,6 +64,27 @@ class User
     WHERE
       u.id =?  
     SQL
-    results[0].values[0]
+    "#{results[0].values[0]}'s average karma is #{results[0].values[2]}"
+  end
+  
+  def save
+    if self.id.nil?
+      QuestionsDatabase.instance.execute(<<-SQL, self.fname, self.lname)
+      INSERT INTO
+        users (fname, lname)
+      VALUES
+        (?, ?)
+      SQL
+      @id = QuestionsDatabase.instance.last_insert_row_id
+    else
+      QuestionsDatabase.instance.execute(<<-SQL, @fname, @lname, self.id)
+      UPDATE
+        users
+      SET 
+        fname = ?, lname = ?
+      WHERE
+        users.id = ?
+      SQL
+    end
   end
 end
